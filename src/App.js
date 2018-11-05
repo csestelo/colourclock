@@ -16,33 +16,25 @@ class App extends Component {
 
     componentDidMount() {
         setInterval(() => {
-            this.updateClockState();
+            this.updateSecond();
+            this.updateMinute();
+            this.updateHour();
         }, 1000)
     }
 
-    updateClockState() {
-        if (this.state.sec < 59) {
-            this.setState({sec: this.state.sec + 1})
-        } else {
-            this.setState({sec: 0});
-            this.updateMinute()
-        }
-    }
+    updateSecond() {
+        this.setState({sec: (this.state.sec + 1) % 60})
+    };
 
     updateMinute() {
-        if (this.state.min < 59) {
-            this.setState({min: this.state.min + 1})
-        } else {
-            this.setState({min: 0});
-            this.updateHour()
+        if (this.state.sec === 0) {
+            this.setState({min: (this.state.min + 1) % 60})
         }
     }
 
     updateHour() {
-        if (this.state.hour < 23) {
-            this.setState({hour: this.state.hour + 1})
-        } else {
-            this.setState({hour: 0, min: 0, sec: 0})
+        if (this.state.sec === 0 && this.state.min === 0) {
+            this.setState({hour: (this.state.hour + 1) % 24})
         }
     }
 
