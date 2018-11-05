@@ -5,8 +5,11 @@ import './App.css';
 class App extends Component {
     constructor(props) {
         super(props);
+        const date = new Date();
         this.state = {
-            hour: 0, min: 0, sec: 0
+            hour: date.getHours(),
+            min: date.getMinutes(),
+            sec: date.getSeconds()
         };
 
     }
@@ -22,16 +25,24 @@ class App extends Component {
             this.setState({sec: this.state.sec + 1})
         } else {
             this.setState({sec: 0});
-            if (this.state.min < 59) {
-                this.setState({min: this.state.min + 1})
-            } else {
-                this.setState({min: 0});
-                if (this.state.hour < 23) {
-                    this.setState({hour: this.state.hour + 1})
-                } else {
-                    this.setState({hour: 0, min: 0, sec: 0})
-                }
-            }
+            this.updateMinute()
+        }
+    }
+
+    updateMinute() {
+        if (this.state.min < 59) {
+            this.setState({min: this.state.min + 1})
+        } else {
+            this.setState({min: 0});
+            this.updateHour()
+        }
+    }
+
+    updateHour() {
+        if (this.state.hour < 23) {
+            this.setState({hour: this.state.hour + 1})
+        } else {
+            this.setState({hour: 0, min: 0, sec: 0})
         }
     }
 
@@ -54,7 +65,8 @@ class App extends Component {
 
         return (
             <div className="App">
-                <header className="App-header" style={{backgroundColor: this.getColour()}}>
+                <header className="App-header"
+                        style={{backgroundColor: this.getColour()}}>
                     <p>
                         {hour}:{min}:{sec}
                     </p>
