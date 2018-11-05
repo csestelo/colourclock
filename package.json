@@ -21,5 +21,20 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-preset-react-app": "^6.1.0",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "ignore-styles": "^5.0.1",
+    "jasmine": "^3.3.0",
+    "jasmine-enzyme": "^7.0.1",
+    "jsdom": "^13.0.0"
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  }
 }
